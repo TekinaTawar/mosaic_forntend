@@ -6,9 +6,8 @@ import {
   MdHistory,
   MdOutlineSettings,
   MdOutlineInfo,
-  MdOutlineKeyboardArrowDown,
-  MdKeyboardArrowRight,
 } from "react-icons/md";
+import OptionGroup from "./components/OptionGroup";
 
 const HomePage = () => {
   return (
@@ -54,27 +53,17 @@ const HomePage = () => {
           <button>Arrange Design</button>
         </section>
         <ul className="option-group-list">
-          <li>
-            <h3>
-              <MdOutlineKeyboardArrowDown className="arrow" />
-              DESIGN FILES
-            </h3>
-            <section className="option-group"></section>
-          </li>
-          <li>
-            <h3>
-              <MdOutlineKeyboardArrowDown className="arrow" />
-              FABRIC ROLL
-            </h3>
-            <section className="option-group"></section>
-          </li>
-          <li>
-            <h3>
-              <MdOutlineKeyboardArrowDown className="arrow" />
-              ARRANGEMENT SETTINGS
-            </h3>
-            <section className="option-group"></section>
-          </li>
+          <OptionGroup groupHead={"DESIGN FILES"}>
+            <li>Add/Import Design File</li>
+          </OptionGroup>
+          <OptionGroup groupHead={"FABRIC ROLL"}>
+            <li>
+              <label htmlFor="width"> width</label>
+              <input type="text" />
+              <input type="radio" />
+            </li>
+          </OptionGroup>
+          <OptionGroup groupHead={"ARRANGEMENT SETTINGS"}></OptionGroup>
         </ul>
         <button>Arrange Design</button>
       </section>

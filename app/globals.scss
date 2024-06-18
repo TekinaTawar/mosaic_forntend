@@ -12,20 +12,18 @@ body {
 
 li {
   list-style: none;
-
 }
 
-body{
+body {
   color: white;
   background-color: #282c34;
   height: 100vh;
   display: grid;
   grid-template-rows: 48px 1fr;
   grid-template-columns: 54px 300px 1fr;
-  grid-template-areas: 
+  grid-template-areas:
     "header header header"
     "sidebar option-section content-section";
-  
 }
 
 header {
@@ -91,7 +89,7 @@ header {
       left: 150%; /* Center horizontally */
       transform: translateX(-50%);
       background-color: hsl(0, 0%, 20%);
-      color: hsl(0,0%,90%);
+      color: hsl(0, 0%, 90%);
       border: 1px solid hsl(0, 0%, 30%);
       font-size: 12px;
       padding: 5px;
@@ -121,7 +119,7 @@ header {
 
 .option-section {
   grid-area: option-section;
-  background-color: #21252B;
+  background-color: #21252b;
   display: flex;
   flex-direction: column;
 
@@ -132,8 +130,8 @@ header {
     height: 72px;
     padding-inline: 16px;
 
-    h2{
-      font-size:14px;
+    h2 {
+      font-size: 14px;
       font-weight: 400;
     }
   }
@@ -141,30 +139,57 @@ header {
   .option-group-list {
     flex-grow: 1;
 
-    li{
-      min-height: 150px;
-    }
+    .option-group {
+      .visibility-checkbox {
+        display: none;
+      }
 
-    li>h3{
-      background-color: #333842;
-      border-block: 1px solid #21252b;
-      height: 28px;
-      font-size: 14px;
-      font-weight: 500;
-      padding-inline:16px;
-      display: flex;
-      align-items: center;
+      .visibility-checkbox:not(:checked) + label .arrow {
+        transform: rotate(-90deg);
+      }
 
-       .arrow {
-        font-size: 20px;
-        margin-right: 8px;
-       }
+      .visibility-checkbox:not(:checked) ~ .options {
+        display: none;
+      }
+
+      .option-head {
+        background-color: #333842;
+        border-block: 1px solid #21252b;
+        height: 32px;
+        font-size: 16px;
+        font-weight: 500;
+        padding-inline: 16px;
+        display: flex;
+        align-items: center;
+
+        .arrow {
+          font-size: 20px;
+          margin-right: 8px;
+        }
+      }
+
+      .option-head:hover{
+        cursor: pointer;
+      }
+
+      .options {
+        margin-left: 16px;
+        padding-block: 12px;
+        font-size: 16px;
+        min-height: 100px;
+      }
     }
   }
-  
 }
 
 .content-section {
   grid-area: content-section;
-  background-color: #282C34;
+  background-color: #282c34;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "content content"
+    "content content"
+    "content content";
 }
