@@ -1,0 +1,170 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+li {
+  list-style: none;
+
+}
+
+body{
+  color: white;
+  background-color: #282c34;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 48px 1fr;
+  grid-template-columns: 54px 300px 1fr;
+  grid-template-areas: 
+    "header header header"
+    "sidebar option-section content-section";
+  
+}
+
+header {
+  grid-area: header;
+  background-color: #21252b;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .project-title {
+    flex-grow: 1;
+    text-align: center;
+  }
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //   background-color: orange;
+
+  .logo {
+    margin-inline: 16px;
+  }
+
+  .mosaic {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 12px;
+
+    span {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: normal;
+    }
+  }
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: #333842;
+  width: 54px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tab-list {
+  li {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    span {
+      display: none;
+      position: absolute;
+      bottom: 50%; /* Position above the icon */
+      left: 150%; /* Center horizontally */
+      transform: translateX(-50%);
+      background-color: hsl(0, 0%, 20%);
+      color: hsl(0,0%,90%);
+      border: 1px solid hsl(0, 0%, 30%);
+      font-size: 12px;
+      padding: 5px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+  }
+
+  li:hover span {
+    display: block;
+  }
+
+  .icon {
+    color: #757982;
+    height: 32px;
+    width: 32px;
+  }
+
+  .current {
+    border-left: 4px solid #18a0fb;
+
+    .icon {
+      color: #18a0fb;
+    }
+  }
+}
+
+.option-section {
+  grid-area: option-section;
+  background-color: #21252B;
+  display: flex;
+  flex-direction: column;
+
+  .option-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 72px;
+    padding-inline: 16px;
+
+    h2{
+      font-size:14px;
+      font-weight: 400;
+    }
+  }
+
+  .option-group-list {
+    flex-grow: 1;
+
+    li{
+      min-height: 150px;
+    }
+
+    li>h3{
+      background-color: #333842;
+      border-block: 1px solid #21252b;
+      height: 28px;
+      font-size: 14px;
+      font-weight: 500;
+      padding-inline:16px;
+      display: flex;
+      align-items: center;
+
+       .arrow {
+        font-size: 20px;
+        margin-right: 8px;
+       }
+    }
+  }
+  
+}
+
+.content-section {
+  grid-area: content-section;
+  background-color: #282C34;
+}
