@@ -168,7 +168,7 @@ header {
         }
       }
 
-      .option-head:hover{
+      .option-head:hover {
         cursor: pointer;
       }
 
@@ -192,4 +192,49 @@ header {
     "content content"
     "content content"
     "content content";
+}
+
+.add-design {
+  label {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.02);
+    }
+
+    .add-icon {
+      color: #18a0fb;
+      font-size: 28px;
+      margin-right: 8px;
+    }
+  }
+
+  input{
+    display: none;
+  }
+}
+
+
+.width {
+  display: flex;
+
+  .width-inputs{
+
+    input[type="radio"]{
+      display: none;
+    }
+
+    label{
+      border: 1px solid #007ACC;
+      background-color: #31497B;
+      width: 20px;
+      height: 20px;
+      font-size: 10px;
+      display: inline-block;
+    }
+  }
+  
+  
 }

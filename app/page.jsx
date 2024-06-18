@@ -6,6 +6,7 @@ import {
   MdHistory,
   MdOutlineSettings,
   MdOutlineInfo,
+  MdAdd,
 } from "react-icons/md";
 import OptionGroup from "./components/OptionGroup";
 
@@ -54,13 +55,24 @@ const HomePage = () => {
         </section>
         <ul className="option-group-list">
           <OptionGroup groupHead={"DESIGN FILES"}>
-            <li>Add/Import Design File</li>
+            <li className="add-design">
+              <input type="file" accept=".dxf" multiple id="upload-file" />
+              <label htmlFor="upload-file">
+                <MdAdd className="add-icon" />
+                Add/Import Design File
+              </label>
+            </li>
           </OptionGroup>
           <OptionGroup groupHead={"FABRIC ROLL"}>
-            <li>
+            <li className="width">
               <label htmlFor="width"> width</label>
-              <input type="text" />
-              <input type="radio" />
+              <div className="width-inputs">
+                <input type="text" />
+                <input type="radio" id="meter" name="unit" value="m" />
+                <label htmlFor="meter">m</label>
+                <input type="radio" id="inch" name="unit" value="in" />
+                <label htmlFor="inch">in</label>
+              </div>
             </li>
           </OptionGroup>
           <OptionGroup groupHead={"ARRANGEMENT SETTINGS"}></OptionGroup>
