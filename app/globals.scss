@@ -10,6 +10,10 @@ body {
   overflow-x: hidden;
 }
 
+::after , ::before {
+  box-sizing: inherit;
+}
+
 li {
   list-style: none;
 }
@@ -155,8 +159,8 @@ header {
       .option-head {
         background-color: #333842;
         border-block: 1px solid #21252b;
-        height: 32px;
-        font-size: 16px;
+        height: 28px;
+        font-size: 14px;
         font-weight: 500;
         padding-inline: 16px;
         display: flex;
@@ -174,7 +178,8 @@ header {
 
       .options {
         margin-left: 16px;
-        padding-block: 12px;
+        margin-right: 12px;
+        padding-block: 20px;
         font-size: 16px;
         min-height: 100px;
       }
@@ -211,30 +216,171 @@ header {
     }
   }
 
-  input{
+  input {
     display: none;
   }
 }
 
+.label-input-grid {
+  display: grid;
+  grid-template-columns: 40% calc(60% - 12px);
+  row-gap: 10px;
+  column-gap: 12px;
 
-.width {
-  display: flex;
-
-  .width-inputs{
-
-    input[type="radio"]{
-      display: none;
-    }
-
-    label{
-      border: 1px solid #007ACC;
-      background-color: #31497B;
-      width: 20px;
-      height: 20px;
-      font-size: 10px;
-      display: inline-block;
-    }
+  & > label {
+    font-size: 12px;
+    text-transform: capitalize;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    align-self: center;
+    justify-self: end;
+    color: #D9D9D9;
   }
-  
-  
 }
+
+.width-inputs,
+.height-inputs {
+  display: flex;
+  align-items: center;
+  border: 2px solid #181a1f;
+  background-color: #1b1d23;
+  gap: 4px;
+  padding-right: 4px;
+
+  input[type="number"] {
+    all: unset;
+    flex-grow: 1;
+    flex-basis: 0;
+    min-width: 0;
+    height: 22px;
+    font-size: 14px;
+    background-color: transparent;
+    color: white;
+    padding-inline: 8px;
+  }
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  input[type="radio"]:checked + label {
+    border-radius: 2px;
+    border: 1px solid #007acc;
+    background-color: #31497b;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  label {
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // display: inline-block;
+  }
+}
+
+.height-inputs {
+
+  .height-enable {
+    display: none;
+  }
+
+  .height-enable + label {
+    position: relative;
+    height: 100%;
+    width: 22px;
+    cursor: pointer;
+  }
+
+  .height-enable + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    background-color: white;
+    border: 3px solid #18a0fb;
+    border-radius: 20%;
+    color: hsl(204, 100%, 51%);
+    cursor: pointer;
+  }
+
+  .height-enable:hover + label:before {
+    outline: 1px solid white;
+  }
+
+  .height-enable:checked + label:before {
+    content: "✔";
+    font-weight: 900;
+    font-size: 14px;
+    text-align: center;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.fabric-pattern-inputs {
+
+  .fabric-pattern-enable {
+    display: none;
+  }
+
+  .fabric-pattern-enable + label {
+    text-align: center;
+    position: relative;
+    height: 100%;
+    width: 22px;
+    padding-left: 30px;
+    cursor: pointer;
+  }
+
+  .fabric-pattern-enable + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    background-color: white;
+    border: 3px solid #18a0fb;
+    border-radius: 20%;
+    color: hsl(204, 100%, 51%);
+    cursor: pointer;
+  }
+
+  .fabric-pattern-enable:hover + label:before {
+    outline: 1px solid white;
+  }
+
+  .fabric-pattern-enable:checked + label:before {
+    content: "✔";
+    font-weight: 900;
+    font-size: 14px;
+    text-align: center;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.arrange-by-label ~ select {
+  background-color: #1B1D23;
+  color: white;
+  border: 2px solid #181A1F;
+  height: 22px;
+  font-size: 14px;
+  border-radius: 2px;
+}
+
