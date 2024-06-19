@@ -9,6 +9,7 @@ import {
   MdAdd,
 } from "react-icons/md";
 import OptionGroup from "./components/OptionGroup";
+import PrimaryButton from "./components/PrimaryButton";
 
 const HomePage = () => {
   return (
@@ -51,7 +52,7 @@ const HomePage = () => {
       <section className="option-section">
         <section className="option-heading">
           <h2>HOME</h2>
-          <button>Arrange Design</button>
+      
         </section>
         <ul className="option-group-list">
           <OptionGroup groupHead={"DESIGN FILES"}>
@@ -151,7 +152,7 @@ const HomePage = () => {
             </div>
           </OptionGroup>
         </ul>
-        <button>Arrange Design</button>
+        <PrimaryButton />
       </section>
       <section className="content-section"></section>
     </>
