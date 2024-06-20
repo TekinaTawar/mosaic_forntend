@@ -20,7 +20,7 @@ li {
 }
 
 body {
-  color: white;
+  color: #cccccc;
   background-color: #282c34;
   height: 100vh;
   display: grid;
@@ -29,6 +29,39 @@ body {
   grid-template-areas:
     "header header header"
     "sidebar option-section content-section";
+}
+
+.unsupported-device {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .unsupported-device {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #282c34;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    z-index: 1000;
+
+    .message{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mosaic {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 14px;
+    }
+  }
 }
 
 header {
@@ -166,6 +199,7 @@ header {
         padding-inline: 16px;
         display: flex;
         align-items: center;
+        width: 100%;
 
         .arrow {
           font-size: 20px;
@@ -175,6 +209,7 @@ header {
 
       .option-head:hover {
         cursor: pointer;
+        border: 1px solid #18a0fb;
       }
 
       .options {
@@ -223,7 +258,7 @@ header {
     white-space: nowrap;
     text-overflow: ellipsis;
     align-self: center;
-    justify-self: end;
+    justify-self: flex-end;
     color: #d9d9d9;
   }
 }
@@ -272,6 +307,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     // display: inline-block;
   }
 }
@@ -426,21 +462,21 @@ header {
     li {
       display: flex;
       gap: 12px;
-      align-items: end;
+      align-items: flex-end;
 
-       > .startIcons {
+      > .startIcons {
         color: orange;
         font-size: 18px;
       }
 
-       > label:hover {
+      > label:hover {
         cursor: pointer;
         transform: scale(1.02);
         //show underline on hover
         text-decoration: underline;
       }
 
-       > input {
+      > input {
         display: none;
       }
     }
