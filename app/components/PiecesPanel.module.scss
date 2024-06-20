@@ -1,0 +1,114 @@
+.piecesPanel {
+  // background-color: orange;
+  width: 90%;
+  // height: 100%;
+  margin: 0 auto;
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  .pieceHeader {
+    // background-color: yellow;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .pieceBody {
+  }
+}
+
+.piece {
+  border: 1px solid #a1a1a1;
+  border-radius: 4px;
+  width: 280px;
+
+  .pieceImage {
+    height: 180px;
+    background-color: #d9d9d9;
+  }
+
+  .pieceDetails {
+    background-color: white;
+    color: black;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 14px 12px;
+    display: grid;
+    grid-template-columns: calc(50% - 7px) calc(50% - 7px);
+    align-items: center;
+    justify-items: cenetr;
+    gap: 14px;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-block: 2px;
+      padding-inline: 8px;
+      font-size: 12px;
+      gap: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      .rotateClockwise {
+        // display: none;;
+      }
+    }
+
+    .countSection {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      label > span {
+        font-weight: bolder;
+        padding-right: 4px;
+      }
+
+      input {
+        // all: unset;
+        flex-grow: 1;
+        flex-basis: 0;
+        min-width: 0px;
+        display: flex;
+        padding-inline: 8px;
+        text-align: center;
+        // background-color: orange;
+      }
+    }
+
+    .perimeterSection {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .perimeterIcon {
+        font-size: 14px;
+        margin-right: 4px;
+      }
+    }
+
+    .areaSection {
+      display: flex;
+      align-items: center;
+			gap: 8px;
+      // justify-content: space-between;
+
+			span{
+
+				text-align: center;
+			}
+
+			.areaIcon{
+				width: 12px;
+				height: 12px;
+				margin-right: 4px;
+				// transform icons to be scaled 1.1 and make it go down by 4px
+				transform: scale(1.4) translateY(1px);
+				// border: 1px solid black;
+			}
+    }
+  }
+}
