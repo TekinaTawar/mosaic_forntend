@@ -50,7 +50,7 @@ body {
     padding: 20px;
     z-index: 1000;
 
-    .message{
+    .message {
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -115,42 +115,58 @@ header {
   li {
     width: 54px;
     height: 54px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
 
-    span {
-      display: none;
-      position: absolute;
-      bottom: 50%; /* Position above the icon */
-      left: 150%; /* Center horizontally */
-      transform: translateX(-50%);
-      background-color: hsl(0, 0%, 20%);
-      color: hsl(0, 0%, 90%);
-      border: 1px solid hsl(0, 0%, 30%);
-      font-size: 12px;
-      padding: 5px;
-      border-radius: 4px;
-      white-space: nowrap;
+    > a {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+      &:hover {
+        cursor: pointer;
+        background-color: hsl(220, 13%, 33%);
+
+        & span {
+          display: block;
+        }
+      }
+
+      span {
+        display: none;
+        position: absolute;
+        bottom: 50%; /* Position above the icon */
+        left: 150%; /* Center horizontally */
+        transform: translateX(-50%);
+        background-color: hsl(0, 0%, 20%);
+        color: hsl(0, 0%, 90%);
+        border: 1px solid hsl(0, 0%, 30%);
+        font-size: 12px;
+        padding: 5px;
+        border-radius: 4px;
+        white-space: nowrap;
+        z-index: 5;
+      }
     }
-  }
-
-  li:hover span {
-    display: block;
-  }
-
-  .icon {
-    color: #757982;
-    height: 32px;
-    width: 32px;
-  }
-
-  .current {
-    border-left: 4px solid #18a0fb;
 
     .icon {
-      color: #18a0fb;
+      color: #757982;
+      height: 32px;
+      width: 32px;
+    }
+
+    .active {
+      border-left: 4px solid #18a0fb;
+
+      .icon {
+        color: #18a0fb;
+      }
+    }
+
+    .underdevelopment:hover{
+      // display: none;
+      cursor: not-allowed;
     }
   }
 }
@@ -413,8 +429,7 @@ header {
   position: relative;
 }
 
-
-.intitalContent{
+.intitalContent {
   width: 100%;
   height: 100%;
   display: grid;
@@ -546,5 +561,4 @@ header {
       }
     }
   }
-
 }

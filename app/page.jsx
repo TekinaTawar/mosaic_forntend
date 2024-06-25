@@ -1,69 +1,19 @@
-import Image from "next/image";
-import logo from "../public/logo.svg";
-import {
-  MdOutlineHome,
-  MdOutlineLayers,
-  MdHistory,
-  MdOutlineSettings,
-  MdOutlineInfo,
-  MdAdd,
-} from "react-icons/md";
 import { VscGoToFile, VscNewFile, VscNotebook } from "react-icons/vsc";
 import OptionGroup from "./components/OptionGroup";
 import PrimaryButton from "./components/PrimaryButton";
 import PiecesPanel from "./components/PiecesPanel";
+import AddDesign from "./components/AddDesign";
 
 const HomePage = () => {
   return (
     <>
-      <header>
-        <div className="logo-container">
-          <Image className="logo" src={logo} alt="Logo" />
-          <h1 className="mosaic">
-            MOSAIC<span> By Vista</span>
-          </h1>
-        </div>
-        <p className="project-title">untitled.mosaic</p>
-      </header>
-      <aside className="sidebar">
-        <ul className="tab-list">
-          <li className="current">
-            <MdOutlineHome className="icon" />
-            <span>Home</span>
-          </li>
-          <li>
-            <MdOutlineLayers className="icon" />
-            <span>Arrangment</span>
-          </li>
-          <li>
-            <MdHistory className="icon" />
-            <span>History</span>
-          </li>
-          <li>
-            <MdOutlineSettings className="icon" />
-            <span>Settings</span>
-          </li>
-        </ul>
-        <ul className="tab-list">
-          <li>
-            <MdOutlineInfo className="icon" />
-            <span>About</span>
-          </li>
-        </ul>
-      </aside>
       <section className="option-section">
         <section className="option-heading">
           <h2>HOME</h2>
         </section>
         <ul className="option-group-list">
           <OptionGroup groupHead={"DESIGN FILES"}>
-            <li className="add-design">
-              <input type="file" accept=".dxf" multiple id="upload-file" />
-              <label htmlFor="upload-file">
-                <MdAdd className="add-icon" />
-                Add/Import Design File
-              </label>
-            </li>
+            <AddDesign />
           </OptionGroup>
           <OptionGroup groupHead={"FABRIC ROLL"}>
             <div className="label-input-grid">
