@@ -4,7 +4,7 @@ import { solutionJsonAtom } from "@/lib/atoms";
 
 import OptionGroup from "../components/OptionGroup";
 
-const layout = ({ children }) => {
+const Layout = ({ children }) => {
   const solutionJson = useAtomValue(solutionJsonAtom);
   console.log(solutionJson);
   console.log(typeof solutionJson);
@@ -38,4 +38,4 @@ const layout = ({ children }) => {
     </>
   );
 };
-export default layout;
+export default Layout;
