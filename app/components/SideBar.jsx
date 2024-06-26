@@ -16,7 +16,7 @@ const SideBar = () => {
     <aside className="sidebar">
       <ul className="tab-list">
         <li className="current">
-          <Link className={`${pathname === "/" ? "active" : ""}`} href="/">
+          <Link className={`${pathname === "/home" ? "active" : ""}`} href="/">
             <MdOutlineHome className="icon" />
             <span>Home</span>
           </Link>

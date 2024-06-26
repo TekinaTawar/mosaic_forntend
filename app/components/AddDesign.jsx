@@ -1,58 +1,67 @@
 "use client";
 import DxfParser from "dxf-parser";
+import { useSetAtom } from "jotai";
+import { dxfFileAtom, dxfFileStatusAtom } from "@/lib/atoms";
+
 import { MdAdd } from "react-icons/md";
 
 const AddDesign = () => {
-  // console.log("this is working");
+  const setdxfFileStatus = useSetAtom(dxfFileStatusAtom);
+  const setdxfFile = useSetAtom(dxfFileAtom);
 
-  const handleFileChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-        const fileText = e.target.result;
-        const parser = new DxfParser();
-        try {
-          const dxf = parser.parseSync(fileText);
-          console.log(dxf);
-          // Assuming `dxf` is the object you want to send as JSON
-          const response = await fetch("http://localhost:5000/dxf-file/", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dxf), // Convert the DXF object to a JSON string
-          });
-          if (response.ok) {
-            const jsonResponse = await response.json();
-            console.log("Success:", jsonResponse);
-          } else {
-            console.error("HTTP error:", response.status);
-          }
-        } catch (err) {
-          console.error(err.stack);
-        }
-      };
-      reader.readAsText(file);
+  const dxfTextToJson = (dxfText) => {
+    const parser = new DxfParser();
+    const dxfJson = parser.parseSync(dxfText);
+    return dxfJson;
+  };
+
+  const dxfToSvg = async (dxfText) => {
+    try {
+      const response = await fetch("http://localhost:5000/dxf-to-svg/", {
+        method: "POST",
+        //send header of content type bienge text/plain
+        headers: {
+          "Content-Type": "text/plain",
+        },
+        body: dxfText,
+      });
+      if (response.ok) {
+        // const jsonResponse = await response.json();
+        // console.log("Success:", jsonResponse);
+        const svg = await response.text();
+        
+        return svg;
+      } else {
+        console.error("HTTP error:", response.status);
+      }
+    } catch (err) {
+      console.error(err.stack);
     }
   };
 
-  const onClickTest = async () => {
-    console.log("Test button clicked 1");
+  const handleFileChange = async (e) => {
+    const dxfFile = e.target.files[0];
+    setdxfFileStatus(`1/5 Reading Raw dxf file ${dxfFile.name}...`);
 
-    // send a get request to localhost:5000 and console log the response
-    const response = await fetch("http://localhost:5000/post/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ test: "test" }),
-    });
-    if (response.ok) {
-      const jsonResponse = await response.json();
-      console.log("Success:", jsonResponse);
-    } else {
-      console.error("HTTP error:", response.status);
+    if (dxfFile) {
+      const reader = new FileReader();
+      reader.readAsText(dxfFile);
+
+      reader.onload = async (e) => {
+        const dxfText = e.target.result;
+        const dxfJson = dxfTextToJson(dxfText);
+        // wait 10 second before setting setdxfFileStatus
+        // new Promise((resolve) =>
+        //   setTimeout(() => {
+        //     setdxfFileStatus(`2/5 parsed raw dxf file ${dxfFile.name}...`);
+        //     resolve();
+        //   }, 4000)
+        // );
+        const svg = await dxfToSvg(dxfText);
+        console.log(svg);
+        setdxfFile(svg);
+        setdxfFileStatus(`success`);
+      };
     }
   };
 
@@ -61,7 +70,6 @@ const AddDesign = () => {
       <input
         type="file"
         accept=".dxf"
-        multiple
         id="upload-file"
         onChange={handleFileChange}
       />
@@ -69,7 +77,6 @@ const AddDesign = () => {
         <MdAdd className="add-icon" />
         Add/Import Design File
       </label>
-      {/* <button onClick={onClickTest}>Test</button> */}
     </li>
   );
 };

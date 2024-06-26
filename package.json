@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "dxf-parser": "^1.1.2",
+    "immer": "^10.1.1",
+    "jotai": "^2.8.3",
+    "jotai-immer": "^0.4.1",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",

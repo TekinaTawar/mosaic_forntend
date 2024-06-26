@@ -164,7 +164,7 @@ header {
       }
     }
 
-    .underdevelopment:hover{
+    .underdevelopment:hover {
       // display: none;
       cursor: not-allowed;
     }
@@ -559,6 +559,43 @@ header {
           }
         }
       }
+    }
+  }
+}
+
+.fileLoadingSection {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  .loader {
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin .8s ease-in-out infinite;
+  }
+
+  > span {
+    font-size: 18px;
+    font-weight: 500;
+    color: #CCCCCC;
+    text-transform: capitalize;
+    
+    padding-bottom: 20px;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
     }
   }
 }
