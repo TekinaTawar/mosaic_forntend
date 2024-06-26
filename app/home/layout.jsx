@@ -7,7 +7,7 @@ import PrimaryButton from "../components/PrimaryButton";
 import { useSetAtom } from "jotai";
 import { fabricRollWidthAtom } from "@/lib/atoms";
 
-const layout = ({ children }) => {
+const Layout = ({ children }) => {
   const setFabricRollWidth = useSetAtom(fabricRollWidthAtom);
 
   return (
@@ -123,4 +123,4 @@ const layout = ({ children }) => {
     </>
   );
 };
-export default layout;
+export default Layout;
