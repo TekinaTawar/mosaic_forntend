@@ -71,7 +71,7 @@ const PrimaryButton = () => {
     console.log(svgContent)
     console.log(jsonContent)
 
-    // router.push("/arrangement");
+    router.push("/arrangement");
   };
 
   return (
