@@ -1,8 +1,15 @@
+"use client";
+
 import AddDesign from "../components/AddDesign";
 import OptionGroup from "../components/OptionGroup";
 import PrimaryButton from "../components/PrimaryButton";
+// import setAtomvlaue
+import { useSetAtom } from "jotai";
+import { fabricRollWidthAtom } from "@/lib/atoms";
 
-const layout = ({children}) => {
+const layout = ({ children }) => {
+  const setFabricRollWidth = useSetAtom(fabricRollWidthAtom);
+
   return (
     <>
       <section className="option-section">
@@ -17,7 +24,13 @@ const layout = ({children}) => {
             <div className="label-input-grid">
               <label htmlFor="width"> width</label>
               <div className="width-inputs">
-                <input type="number" />
+                <input
+                  type="number"
+                  defaultValue={1.5}
+                  onChange={(e) => {
+                    setFabricRollWidth({ width: e.target.value, unit: "m" });
+                  }}
+                />
                 <input
                   type="radio"
                   id="width-m"
@@ -33,6 +46,21 @@ const layout = ({children}) => {
                   value="in"
                 />
                 <label htmlFor="width-in">in</label>
+              </div>
+
+              <label htmlFor="fabric-pattern">Fabric Pattern</label>
+              <div className="fabric-pattern-inputs">
+                <input
+                  type="checkbox"
+                  id="fabric-pattern-enable"
+                  className="fabric-pattern-enable"
+                />
+                <label
+                  htmlFor="fabric-pattern-enable"
+                  className="fabric-pattern-enable-label"
+                >
+                  Plane
+                </label>
               </div>
               <label htmlFor="height">height</label>
               <div className="height-inputs">
@@ -62,20 +90,6 @@ const layout = ({children}) => {
                 />
                 <label htmlFor="height-in">in</label>
               </div>
-              <label htmlFor="fabric-pattern">Fabric Pattern</label>
-              <div className="fabric-pattern-inputs">
-                <input
-                  type="checkbox"
-                  id="fabric-pattern-enable"
-                  className="fabric-pattern-enable"
-                />
-                <label
-                  htmlFor="fabric-pattern-enable"
-                  className="fabric-pattern-enable-label"
-                >
-                  Plane
-                </label>
-              </div>
             </div>
           </OptionGroup>
           <OptionGroup groupHead={"ARRANGEMENT SETTINGS"}>
@@ -103,11 +117,9 @@ const layout = ({children}) => {
             </div>
           </OptionGroup>
         </ul>
-				<PrimaryButton />
-			</section>
-			<section className="content-section">
-				{children}
-			</section>
+        <PrimaryButton />
+      </section>
+      <section className="content-section">{children}</section>
     </>
   );
 };

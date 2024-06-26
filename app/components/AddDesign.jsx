@@ -1,13 +1,46 @@
 "use client";
 import DxfParser from "dxf-parser";
 import { useSetAtom } from "jotai";
-import { dxfFileAtom, dxfFileStatusAtom } from "@/lib/atoms";
+import {
+  fullDxfSvgDataAtom,
+  dxfFileStatusAtom,
+  dxfJsonParsedAtom,
+  dxfFileNameAtom,
+} from "@/lib/atoms";
 
 import { MdAdd } from "react-icons/md";
 
 const AddDesign = () => {
   const setdxfFileStatus = useSetAtom(dxfFileStatusAtom);
-  const setdxfFile = useSetAtom(dxfFileAtom);
+  const setFullDxfSvgData = useSetAtom(fullDxfSvgDataAtom);
+  const setDxfJsonParsed = useSetAtom(dxfJsonParsedAtom);
+  const setDxfFileName = useSetAtom(dxfFileNameAtom)
+
+  const parseDxfJson = (dxfJsonRaw) => {
+    const parsedBlocks = [];
+
+    Object.entries(dxfJsonRaw.blocks).forEach(([blockName, blockData]) => {
+      console.log(blockName, blockData);
+      const vertices = [];
+
+      blockData.entities.forEach((entity) => {
+        if (entity.type === "POLYLINE") {
+          console.log(entity);
+          const layer1Vertices = entity.vertices
+            .filter((vertex) => vertex.layer === "1")
+            .map((vertex) => [vertex.x, vertex.y]);
+
+          vertices.push(...layer1Vertices);
+        }
+      });
+
+      if (vertices.length > 0) {
+        parsedBlocks.push({ pieceName: blockName, vertices: vertices, demand: 1 });
+      }
+    });
+
+    return parsedBlocks;
+  };
 
   const dxfTextToJson = (dxfText) => {
     const parser = new DxfParser();
@@ -29,7 +62,7 @@ const AddDesign = () => {
         // const jsonResponse = await response.json();
         // console.log("Success:", jsonResponse);
         const svg = await response.text();
-        
+
         return svg;
       } else {
         console.error("HTTP error:", response.status);
@@ -41,7 +74,8 @@ const AddDesign = () => {
 
   const handleFileChange = async (e) => {
     const dxfFile = e.target.files[0];
-    setdxfFileStatus(`1/5 Reading Raw dxf file ${dxfFile.name}...`);
+    setdxfFileStatus(`Reading & Processing Raw dxf file ${dxfFile.name}...`);
+    
 
     if (dxfFile) {
       const reader = new FileReader();
@@ -49,17 +83,21 @@ const AddDesign = () => {
 
       reader.onload = async (e) => {
         const dxfText = e.target.result;
-        const dxfJson = dxfTextToJson(dxfText);
-        // wait 10 second before setting setdxfFileStatus
-        // new Promise((resolve) =>
-        //   setTimeout(() => {
-        //     setdxfFileStatus(`2/5 parsed raw dxf file ${dxfFile.name}...`);
-        //     resolve();
-        //   }, 4000)
-        // );
-        const svg = await dxfToSvg(dxfText);
-        console.log(svg);
-        setdxfFile(svg);
+        await Promise.all([
+          (async () => {
+            // this gets svg data from server and sets it.
+            const svg = await dxfToSvg(dxfText);
+            setFullDxfSvgData(svg);
+          })(),
+          (async () => {
+            const dxfJsonRaw = dxfTextToJson(dxfText);
+            const parsedDxfJson = parseDxfJson(dxfJsonRaw);
+            console.log("parsedDxfJson")
+            console.log(parsedDxfJson)
+            setDxfJsonParsed(parsedDxfJson);
+          })(),
+        ]);
+        setDxfFileName(dxfFile.name)
         setdxfFileStatus(`success`);
       };
     }
