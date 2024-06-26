@@ -56,7 +56,7 @@ const PrimaryButton = () => {
       fabricRollWidth
     );
     // send this serverJson to the server and recive a response of a svg and json
-    const response = await fetch("http://localhost:5000/arrange-parsed-json/", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/arrange-parsed-json/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +68,8 @@ const PrimaryButton = () => {
     const jsonContent = data.json;
     setSolutionSvg(svgContent);
 		setSolutionJson(jsonContent);
-		console.log(svgContent)
+    console.log(svgContent)
+    console.log(jsonContent)
 
     // router.push("/arrangement");
   };

@@ -14,7 +14,7 @@ const AddDesign = () => {
   const setdxfFileStatus = useSetAtom(dxfFileStatusAtom);
   const setFullDxfSvgData = useSetAtom(fullDxfSvgDataAtom);
   const setDxfJsonParsed = useSetAtom(dxfJsonParsedAtom);
-  const setDxfFileName = useSetAtom(dxfFileNameAtom)
+  const setDxfFileName = useSetAtom(dxfFileNameAtom);
 
   const parseDxfJson = (dxfJsonRaw) => {
     const parsedBlocks = [];
@@ -35,7 +35,11 @@ const AddDesign = () => {
       });
 
       if (vertices.length > 0) {
-        parsedBlocks.push({ pieceName: blockName, vertices: vertices, demand: 1 });
+        parsedBlocks.push({
+          pieceName: blockName,
+          vertices: vertices,
+          demand: 1,
+        });
       }
     });
 
@@ -50,14 +54,17 @@ const AddDesign = () => {
 
   const dxfToSvg = async (dxfText) => {
     try {
-      const response = await fetch("http://localhost:5000/dxf-to-svg/", {
-        method: "POST",
-        //send header of content type bienge text/plain
-        headers: {
-          "Content-Type": "text/plain",
-        },
-        body: dxfText,
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/dxf-to-svg/`,
+        {
+          method: "POST",
+          //send header of content type bienge text/plain
+          headers: {
+            "Content-Type": "text/plain",
+          },
+          body: dxfText,
+        }
+      );
       if (response.ok) {
         // const jsonResponse = await response.json();
         // console.log("Success:", jsonResponse);
@@ -75,7 +82,6 @@ const AddDesign = () => {
   const handleFileChange = async (e) => {
     const dxfFile = e.target.files[0];
     setdxfFileStatus(`Reading & Processing Raw dxf file ${dxfFile.name}...`);
-    
 
     if (dxfFile) {
       const reader = new FileReader();
@@ -92,12 +98,12 @@ const AddDesign = () => {
           (async () => {
             const dxfJsonRaw = dxfTextToJson(dxfText);
             const parsedDxfJson = parseDxfJson(dxfJsonRaw);
-            console.log("parsedDxfJson")
-            console.log(parsedDxfJson)
+            console.log("parsedDxfJson");
+            console.log(parsedDxfJson);
             setDxfJsonParsed(parsedDxfJson);
           })(),
         ]);
-        setDxfFileName(dxfFile.name)
+        setDxfFileName(dxfFile.name);
         setdxfFileStatus(`success`);
       };
     }
