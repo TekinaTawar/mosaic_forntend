@@ -54,7 +54,7 @@ const Piece = ({ pieceJson }) => {
 };
 
 const PiecesPanel = () => {
-  const [boundriesOrFull, setBoundriesOrFull] = useState("Full Design");
+  const [boundriesOrFull, setBoundriesOrFull] = useState("Boundries Only");
   const fullDxfSvgData = useAtomValue(fullDxfSvgDataAtom);
   const dxfJsonParsed = useAtomValue(dxfJsonParsedAtom);
   console.log("dxfJsonParsed")
