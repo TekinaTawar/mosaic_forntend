@@ -33,7 +33,7 @@ const SideBar = () => {
         <li>
           <Link
             className={`underdevelopment ${pathname === "/history" ? "active" : ""}`}
-            href="/history"
+            href=""
           >
             <MdHistory className="icon" />
             <span>History - under develpment</span>
@@ -42,7 +42,7 @@ const SideBar = () => {
         <li>
           <Link
             className={`underdevelopment ${pathname === "/settings" ? "active" : ""}`}
-            href="/settings"
+            href=""
           >
             <MdOutlineSettings className="icon" />
             <span>Settings - under development</span>

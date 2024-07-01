@@ -58,7 +58,7 @@
     width: 100%;
     height: 780px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
     row-gap: 26px;
     overflow-y: scroll;
     
@@ -81,7 +81,7 @@
 .piece {
   border: 1px solid #a1a1a1;
   border-radius: 4px;
-  width: 280px;
+  width: 290px;
 
   .pieceImage {
     height: 180px;
@@ -143,11 +143,18 @@
     .perimeterSection {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 1px;
+      // border: 1px solid black;
+
+      //select first span
+      span:first-child {
+        // font-weight: bolder;
+        font-size: 12px;
+      }
 
       .perimeterIcon {
-        font-size: 14px;
-        margin-right: 4px;
+        font-size: 10px;
+        margin-right: 1px;
       }
     }
 

@@ -39,14 +39,14 @@ const Piece = ({ pieceJson }) => {
             <FaSignHanging className={S.perimeterIcon} />
             Perimeter
           </span>
-          <span>4 ft</span>
+          <span>~{(pieceJson.perimeter/10).toFixed(0)}cm</span>
         </section>
         <section className={S.areaSection}>
           <span>
             <Image src={area} alt="Area" className={S.areaIcon} />
             Area
           </span>
-          <span>4 ft</span>
+          <span>~{(pieceJson.area/100).toFixed(0)} cm<sup>2</sup></span>
         </section>
       </section>
     </section>
