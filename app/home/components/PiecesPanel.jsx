@@ -89,9 +89,9 @@ const PiecesPanel = () => {
           </label>
         </div>
         <div className={S.viewOptions}>
-          <span>view</span>
-          <label htmlFor="">Grid</label>
-          <label htmlFor="">List</label>
+          <span>Sort</span>
+          {/* <label htmlFor="">Grid</label>
+          <label htmlFor="">List</label> */}
         </div>
       </section>
       {boundriesOrFull === "Boundries Only" ? (

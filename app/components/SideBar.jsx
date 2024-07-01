@@ -30,7 +30,7 @@ const SideBar = () => {
             <span>Arrangement</span>
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link
             className={`underdevelopment ${pathname === "/history" ? "active" : ""}`}
             href=""
@@ -38,7 +38,7 @@ const SideBar = () => {
             <MdHistory className="icon" />
             <span>History - under develpment</span>
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link
             className={`underdevelopment ${pathname === "/settings" ? "active" : ""}`}
