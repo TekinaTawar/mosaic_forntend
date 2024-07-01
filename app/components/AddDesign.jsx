@@ -9,7 +9,7 @@ import {
 } from "@/lib/atoms";
 
 import { MdAdd } from "react-icons/md";
-import { calculateArea, calculatePerimeter } from "utils/PolygonUtil";
+import { calculateArea, calculatePerimeter } from "utils/polygonUtil";
 
 const AddDesign = () => {
   const setdxfFileStatus = useSetAtom(dxfFileStatusAtom);
@@ -37,7 +37,6 @@ const AddDesign = () => {
 
       const perimeter = calculatePerimeter(vertices);
       const area = calculateArea(vertices);
-
 
       if (vertices.length > 0) {
         parsedBlocks.push({
