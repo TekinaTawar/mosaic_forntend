@@ -92,7 +92,7 @@ const Layout = ({ children }) => {
               </div>
             </div>
           </OptionGroup>
-          <OptionGroup groupHead={"ARRANGEMENT SETTINGS"}>
+          <OptionGroup groupHead={"ARRANGEMENT SETTINGS"} closed={true}>
             <div className="label-input-grid">
               <label htmlFor="arrange-by" className="arrange-by-label">
                 Arrange By

@@ -1,12 +1,12 @@
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
-const OptionGroup = ({groupHead, children}) => {
+const OptionGroup = ({groupHead, children, closed}) => {
   return (
     <li className="option-group">
       <input
         type="checkbox"
         id={groupHead}
-        defaultChecked
+        defaultChecked={!closed}
         className="visibility-checkbox"
       />
       <label htmlFor={groupHead} className="option-head">

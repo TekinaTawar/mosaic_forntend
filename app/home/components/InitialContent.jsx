@@ -1,6 +1,9 @@
+import { useHandleFileChange } from "app/hooks/handleFileChange";
 import { VscGoToFile, VscNewFile, VscNotebook } from "react-icons/vsc";
 
 const InitialContent = () => {
+  const handleFileChange = useHandleFileChange();
+
   return (
     <div className="intitalContent">
       <section className="heading">
@@ -12,8 +15,13 @@ const InitialContent = () => {
         <ul>
           <li>
             <VscGoToFile className="startIcons" />
-            <label htmlFor="openProject">Open Project</label>
-            <input type="file" id="openProject" />
+            <label htmlFor="upload-file">Open Project</label>
+            <input
+              type="file"
+              accept=".dxf"
+              id="upload-file"
+              onChange={handleFileChange}
+            />
           </li>
           <li>
             <VscNewFile className="startIcons" />
