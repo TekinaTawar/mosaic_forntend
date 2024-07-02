@@ -62,14 +62,14 @@ const parseDxfJson = (dxfJsonRaw) => {
             // Add the first vertex if it's the start of a new piece
             if (!previousVertex) {
               currentPieceVertices.push([
-                entity.vertices[0].x*10,
-                entity.vertices[0].y*10,
+                entity.vertices[0].x * 10,
+                entity.vertices[0].y * 10,
               ]);
             }
             // Always add the second vertex
             currentPieceVertices.push([
-              entity.vertices[1].x*10,
-              entity.vertices[1].y*10,
+              entity.vertices[1].x * 10,
+              entity.vertices[1].y * 10,
             ]);
           } else {
             // Calculate perimeter and area for the current piece
@@ -111,6 +111,26 @@ const parseDxfJson = (dxfJsonRaw) => {
           area: area,
         });
       }
+
+      dxfJsonRaw.entities.forEach((entity, index) => {
+        if (entity.type === "LWPOLYLINE") {
+          console.log("this running .ll")
+          const vertices = entity.vertices.map((vertex) => [
+            vertex.x*10,
+            vertex.y*10,
+          ]);
+          const perimeter = calculatePerimeter(vertices);
+          const area = calculateArea(vertices);
+
+          parsedBlocks.push({
+            pieceName: entity.handle,
+            vertices: vertices,
+            demand: 1,
+            perimeter: perimeter,
+            area: area,
+          });
+        }
+      });
     }
   } catch (error) {
     console.error(error);
