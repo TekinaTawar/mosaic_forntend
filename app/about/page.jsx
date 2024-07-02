@@ -15,14 +15,10 @@ const AboutPage = () => {
       <h3>Key Features</h3>
       <ol>
         <li>
-          2D Irregular Bin Packing:
+          Blazing Fast Native Processing
           <ul>
             <li>
-              Our software employs sophisticated 2D irregular bin packing
-              algorithms. This means it can handle a variety of cloth shapes and
-              designs, arranging them in the most space-efficient manner
-              possible. Whether your designs are standard shapes or unique and
-              complex, our software optimizes the layout to reduce fabric waste.
+              Our software uses a backend written in low level language rust that is blazing fast and can handle large files with ease. This ensures ease of use and quick processing times, even for complex designs.
             </li>
           </ul>
         </li>

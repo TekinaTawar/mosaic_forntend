@@ -11,6 +11,7 @@ import {
   fabricRollWidthAtom,
   solutionSvgAtom,
   solutionJsonAtom,
+  dxfFileMultiplierAtom,
 } from "@/lib/atoms";
 import { useRouter } from "next/navigation";
 
@@ -19,6 +20,7 @@ const PrimaryButton = () => {
   const dxfJsonParsed = useAtomValue(dxfJsonParsedAtom);
   const fabricRollWidth = useAtomValue(fabricRollWidthAtom);
   const dxfFileName = useAtomValue(dxfFileNameAtom);
+  const dxfFileMultiplier = useAtomValue(dxfFileMultiplierAtom);
 
   const setSolutionSvg = useSetAtom(solutionSvgAtom);
   const setSolutionJson = useSetAtom(solutionJsonAtom);
@@ -26,11 +28,15 @@ const PrimaryButton = () => {
   const router = useRouter();
 
   const parseJsonForServer = (dxfFileName, dxfJsonParsed, fabricRollWidth) => {
+    console.log("dxfFileMultiplier")
+    console.log(dxfFileMultiplier)
     const Items = [];
 
     dxfJsonParsed.forEach((piece) => {
+      console.log("running")
+      console.log(piece.demand)
       Items.push({
-        Demand: piece.demand,
+        Demand: piece.demand * dxfFileMultiplier,
         Shape: {
           Type: "SimplePolygon",
           Data: piece.vertices,
@@ -55,6 +61,7 @@ const PrimaryButton = () => {
       dxfJsonParsed,
       fabricRollWidth
     );
+    console.log(serverJson)
     // send this serverJson to the server and recive a response of a svg and json
     const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/arrange-parsed-json/`, {
       method: "POST",

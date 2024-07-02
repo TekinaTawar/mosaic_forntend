@@ -4,11 +4,19 @@ import AddDesign from "../components/AddDesign";
 import OptionGroup from "../components/OptionGroup";
 import PrimaryButton from "../components/PrimaryButton";
 // import setAtomvlaue
-import { useSetAtom } from "jotai";
-import { fabricRollWidthAtom } from "@/lib/atoms";
+import { useSetAtom, useAtomValue, useAtom } from "jotai";
+import {
+  dxfFileMultiplierAtom,
+  dxfFileNameAtom,
+  fabricRollWidthAtom,
+} from "@/lib/atoms";
 
 const Layout = ({ children }) => {
   const setFabricRollWidth = useSetAtom(fabricRollWidthAtom);
+  const dxfFileName = useAtomValue(dxfFileNameAtom);
+  const [dxfFileMultiplier, setDxfFileMultiplier] = useAtom(
+    dxfFileMultiplierAtom
+  );
 
   return (
     <>
@@ -19,6 +27,26 @@ const Layout = ({ children }) => {
         <ul className="option-group-list">
           <OptionGroup groupHead={"DESIGN FILES"}>
             <AddDesign />
+            {dxfFileName !== null && (
+              <div className="fileInfo">
+                <p>{dxfFileName}</p>
+                <input
+                  type="number"
+                  id="count"
+                  min={1}
+                  max={6}
+                  value={dxfFileMultiplier}
+                  onChange={(e) => {
+                    const newValue = Number(e.target.value);
+                    console.log(newValue)
+                    setDxfFileMultiplier((draft) => {
+                      draft = newValue;
+                      return draft;
+                    });
+                  }}
+                />
+              </div>
+            )}
           </OptionGroup>
           <OptionGroup groupHead={"FABRIC ROLL"}>
             <div className="label-input-grid">
@@ -62,7 +90,7 @@ const Layout = ({ children }) => {
                   Plane
                 </label>
               </div>
-              <label htmlFor="height">height</label>
+              <label htmlFor="height">tolerance</label>
               <div className="height-inputs">
                 <input
                   type="checkbox"

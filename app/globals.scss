@@ -261,6 +261,43 @@ header {
   }
 }
 
+.fileInfo {
+  // border: 1px solid white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  gap: 1ch;
+
+  p {
+    //disable line wrap
+    white-space: nowrap;
+    
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    //show ... in the middle not end
+    // color: #2e4a5d;
+    font-size: 15px;
+    //itallicize
+    // font-style: italic;
+    list-style: outside;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+  }
+  input {
+    all: unset;
+    width: 6ch;
+    background-color: #1B1D23;
+    color: white;
+    border: .5px solid #2e4a5d;
+    font-size: 14px;
+    padding-left: 1ch;
+    //remove intput styling
+    //  display:none;
+  }
+}
+
 .label-input-grid {
   display: grid;
   grid-template-columns: 40% calc(60% - 12px);
@@ -630,16 +667,15 @@ header {
     gap: 12px;
     align-items: center;
     justify-content: center;
-    
-    span{
+
+    span {
       width: 70ch;
       //make text center
       text-align: center;
 
       a {
-        color:#007acc;
+        color: #007acc;
       }
     }
   }
 }
-
