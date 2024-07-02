@@ -100,6 +100,8 @@ export const useHandleFileChange = () => {
           })(),
           (async () => {
             const dxfJsonRaw = dxfTextToJson(dxfText);
+            console.log("dxfJsonRaw")
+            console.log(dxfJsonRaw)
             const parsedDxfJson = parseDxfJson(dxfJsonRaw);
             console.log("parsedDxfJson");
             console.log(parsedDxfJson);

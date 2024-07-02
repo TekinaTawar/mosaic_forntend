@@ -7,13 +7,12 @@ import rotateClockwise from "@/public/icons/rotateClockwise.svg";
 import Image from "next/image";
 import { useState } from "react";
 import { dxfJsonParsedAtom, fullDxfSvgDataAtom } from "@/lib/atoms";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { createSVG } from "utils/svgGenerator";
 
-const Piece = ({ pieceJson }) => {
-
-  console.log("pieceJson")
-  console.log(pieceJson)
+const Piece = ({ pieceJson, setDJP }) => {
+  console.log("pieceJson");
+  console.log(pieceJson);
   return (
     <section className={S.piece}>
       <section className={S.pieceImage}>
@@ -32,21 +31,41 @@ const Piece = ({ pieceJson }) => {
           <label htmlFor="count">
             <span>#</span>Count
           </label>
-          <input type="number" id="count" defaultValue={1} min={1} />
+          <input
+            type="number"
+            id="count"
+            min={1}
+            value={pieceJson.demand}
+            onChange={(e) => {
+              const newValue = Number(e.target.value);
+              setDJP((draft) => {
+                const index = draft.findIndex(
+                  (item) => item.pieceName === pieceJson.pieceName
+                );
+                console.log(index);
+                if (index !== -1) {
+                  console.log("running");
+                  draft[index].demand = newValue;
+                }
+              });
+            }}
+          />
         </section>
         <section className={S.perimeterSection}>
           <span>
             <FaSignHanging className={S.perimeterIcon} />
             Perimeter
           </span>
-          <span>~{(pieceJson.perimeter/10).toFixed(0)}cm</span>
+          <span>~{(pieceJson.perimeter / 10).toFixed(0)}cm</span>
         </section>
         <section className={S.areaSection}>
           <span>
             <Image src={area} alt="Area" className={S.areaIcon} />
             Area
           </span>
-          <span>~{(pieceJson.area/100).toFixed(0)} cm<sup>2</sup></span>
+          <span>
+            ~{(pieceJson.area / 100).toFixed(0)} cm<sup>2</sup>
+          </span>
         </section>
       </section>
     </section>
@@ -56,9 +75,10 @@ const Piece = ({ pieceJson }) => {
 const PiecesPanel = () => {
   const [boundriesOrFull, setBoundriesOrFull] = useState("Boundries Only");
   const fullDxfSvgData = useAtomValue(fullDxfSvgDataAtom);
-  const dxfJsonParsed = useAtomValue(dxfJsonParsedAtom);
-  console.log("dxfJsonParsed")
-  console.log(dxfJsonParsed)
+  const [dxfJsonParsed, setDxfJsonParsed] = useAtom(dxfJsonParsedAtom);
+
+  console.log("dxfJsonParsed");
+  console.log(dxfJsonParsed);
 
   const toggleBoundriesOrFull = () => {
     if (boundriesOrFull === "Boundries Only") {
@@ -96,8 +116,14 @@ const PiecesPanel = () => {
       </section>
       {boundriesOrFull === "Boundries Only" ? (
         <section className={S.pieceBody}>
-          {dxfJsonParsed.map((pieceJson, index) => {
-            return <Piece key={index} pieceJson={pieceJson} />;
+          {dxfJsonParsed.map((pieceJson) => {
+            return (
+              <Piece
+                key={pieceJson.pieceName}
+                pieceJson={pieceJson}
+                setDJP={setDxfJsonParsed}
+              />
+            );
           })}
         </section>
       ) : (
