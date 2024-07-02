@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
             <div className="logo-container">
               <Image className="logo" src={logo} alt="Logo" />
               <h1 className="mosaic">
-                MOSAIC<span> By Vista</span>
+                MOSAIC<span> By VISTA</span>
               </h1>
             </div>
             <p className="project-title">{/*untitled.mosic*/}</p>

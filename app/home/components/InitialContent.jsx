@@ -8,7 +8,7 @@ const InitialContent = () => {
     <div className="intitalContent">
       <section className="heading">
         <h1>Mosaic</h1>
-        <span>By Vista</span>
+        <span>By VISTA</span>
       </section>
       <section className="start">
         <h2>Start</h2>
